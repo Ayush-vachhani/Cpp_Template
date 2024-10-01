@@ -58,7 +58,6 @@ ostream& operator<<(ostream& os, const vector<T>& vec) {
     for (const auto& elem : vec) {
         os << elem << " "; // Print each element in the vector
     }
-    os << "\n";
     return os; // Return the ostream object for chaining
 }
 
@@ -83,15 +82,59 @@ ostream& operator<<(ostream& os, const set<T>& s) {
     os << "\n";
     return os; // Return the ostream object for chaining
 }
+
+//overload for unordered sets
+template<typename T>
+ostream& operator<<(ostream& os, const unordered_set<T>& s) {
+    for (const auto& elem : s) {
+        os << elem << " "; // Print each element in the vector
+    }
+    os << "\n";
+    return os; // Return the ostream object for chaining
+}
+
+//overload for unordered map
+template<typename K, typename V>
+ostream& operator<<(ostream& os, const unordered_map<K, V>& umap) {
+    for (const auto& [key, value] : umap) {
+        os << key << ": " << value << "\n"; // Print key-value pairs
+    }
+    return os; // Return the ostream object for chaining
+}
+
+//overload for map
+template<typename K, typename V>
+ostream& operator<<(ostream& os, const map<K, V>& umap) {
+    for (const auto& [key, value] : umap) {
+        os << key << ": " << value << "\n"; // Print key-value pairs
+    }
+    return os; // Return the ostream object for chaining
+}
 //-------------------------------------------------------------------------------------------------------------------------------
 
+int dfs(const int node, vector<bool>&vis, vector<vector<int>>& adj)
+{
+    if(vis[node]) return node;
+    vis[node] = true;
+
+    for (const auto &nei:adj[node])
+    {
+        return dfs(nei, vis, adj);
+    }
+}
 void solve()
 {
-    cout<<"Hello me";
+    unordered_map<string, vector<int>> my_map = {
+        {"group1", {1, 2, 3}},
+        {"group2", {4, 5}},
+        {"group3", {6, 7, 8, 9}}
+    };
+
+    cout << "Unordered map contents:\n" << my_map;
+
 }
 
 int main() {
-    cin.tie(nullptr);
 #ifndef ONLINE_JUDGE
     freopen("../input.txt", "r", stdin);
     freopen("../output.txt", "w", stdout);
