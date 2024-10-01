@@ -87,7 +87,7 @@ ostream& operator<<(ostream& os, const set<T>& s) {
 
 void solve()
 {
-
+    cout<<"Hello me";
 }
 
 int main() {
