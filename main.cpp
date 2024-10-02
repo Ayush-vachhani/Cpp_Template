@@ -6,7 +6,6 @@ using namespace std;
 #include "pch.h"
 #endif
 //------------------------------------------------------------------------------------------------------------------------------
-//macros
 //read array
 template <typename T>
 vector<T> read_array(int n) {
@@ -25,7 +24,7 @@ vector<vector<T>> read_array(int n, Args... args) {
     }
     return result;
 }
-
+//easy vector macro
 template<typename T, typename... Args>
 auto VEC(T initial_value, int dim, Args... sizes) {
     // Handle the base case when only one dimension is left
@@ -52,15 +51,27 @@ inline string to_uppercase(const std::string& str) {
     return result;
 }
 //-------------------------------------------------------------------------------------------------------------------------------
+// Overload for pair
+template<typename T1, typename T2>
+std::ostream& operator<<(std::ostream& os, const std::pair<T1, T2>& p) {
+    os << "(" << p.first << ", " << p.second << ")";
+    return os;
+}
+// Overload for 3-element tuple
+template <typename T1, typename T2, typename T3>
+std::ostream& operator<<(std::ostream& os, const std::tuple<T1, T2, T3>& t) {
+    os << "(" << std::get<0>(t) << ", " << std::get<1>(t) << ", " << std::get<2>(t) << ")";
+    return os;
+}
 // Overload for 1D vector
 template<typename T>
 ostream& operator<<(ostream& os, const vector<T>& vec) {
     for (const auto& elem : vec) {
         os << elem << " "; // Print each element in the vector
     }
+    os << "\n";
     return os; // Return the ostream object for chaining
 }
-
 // Overload for 2D vector
 ostream& operator<<(ostream& os, const vector<vector<int>>& adjList) {
     for (size_t node = 0; node < adjList.size(); ++node) {
@@ -72,7 +83,6 @@ ostream& operator<<(ostream& os, const vector<vector<int>>& adjList) {
     }
     return os;
 }
-
 //Overload for sets
 template<typename T>
 ostream& operator<<(ostream& os, const set<T>& s) {
@@ -82,7 +92,6 @@ ostream& operator<<(ostream& os, const set<T>& s) {
     os << "\n";
     return os; // Return the ostream object for chaining
 }
-
 //overload for unordered sets
 template<typename T>
 ostream& operator<<(ostream& os, const unordered_set<T>& s) {
@@ -92,7 +101,6 @@ ostream& operator<<(ostream& os, const unordered_set<T>& s) {
     os << "\n";
     return os; // Return the ostream object for chaining
 }
-
 //overload for unordered map
 template<typename K, typename V>
 ostream& operator<<(ostream& os, const unordered_map<K, V>& umap) {
@@ -101,7 +109,6 @@ ostream& operator<<(ostream& os, const unordered_map<K, V>& umap) {
     }
     return os; // Return the ostream object for chaining
 }
-
 //overload for map
 template<typename K, typename V>
 ostream& operator<<(ostream& os, const map<K, V>& umap) {
@@ -111,29 +118,26 @@ ostream& operator<<(ostream& os, const map<K, V>& umap) {
     return os; // Return the ostream object for chaining
 }
 //-------------------------------------------------------------------------------------------------------------------------------
-
-int dfs(const int node, vector<bool>&vis, vector<vector<int>>& adj)
-{
-    if(vis[node]) return node;
-    vis[node] = true;
-
-    for (const auto &nei:adj[node])
-    {
-        return dfs(nei, vis, adj);
-    }
+//Directions
+static const vector<pair<int, int>> all_directions = {{-1, 0},{1, 0},{0, -1},{0, 1},{-1, -1},{-1, 1},{1, -1},{1, 1}};
+static const vector<pair<int, int>> diagonal_directions = {all_directions[4], all_directions[5], all_directions[6],all_directions[7]};
+static const vector<pair<int, int>> orthogonal_directions = {all_directions[0], all_directions[1], all_directions[2], all_directions[3]  };
+//-------------------------------------------------------------------------------------------------------------------------------
+//Utils
+template<typename Container>
+bool is_valid_index(const Container& container, const int index) {
+    return index >= 0 && index < static_cast<int>(container.size());
 }
+//-------------------------------------------------------------------------------------------------------------------------------
+void add(int a, int b)
+{
+    cout<<__builtin_popcount(15);
+}
+
 void solve()
 {
-    unordered_map<string, vector<int>> my_map = {
-        {"group1", {1, 2, 3}},
-        {"group2", {4, 5}},
-        {"group3", {6, 7, 8, 9}}
-    };
-
-    cout << "Unordered map contents:\n" << my_map;
-
+    add(4, 3);
 }
-
 int main() {
 #ifndef ONLINE_JUDGE
     freopen("../input.txt", "r", stdin);
